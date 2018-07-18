@@ -206,6 +206,17 @@ class NetEase(object):
             for song in songs:
                 self.download_song_by_id(song.song_id, song.song_name, folder)
 
+    @timeit
+    def download_toplist_by_id(self, toplist_id, toplist_name):
+        try:
+            songs = self.crawler.get_toplist_songs(toplist_id)
+        except RequestException as exception:
+            click.echo(exception)
+        else:
+            folder = os.path.join(self.folder, toplist_name)
+            for song in songs:
+                self.download_song_by_id(song.song_id, song.song_name, folder)
+
     def download_user_playlists_by_search(self, user_name):
         """Download user's playlists by his/her name.
 

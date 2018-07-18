@@ -265,6 +265,13 @@ class Crawler(object):
         songs = [Song(song['id'], song['name']) for song in songs]
         return songs
 
+    def get_toplist_songs(self, toplist_id):
+        url = 'http://music.163.com/api/playlist/detail?id={}'.format(toplist_id)
+        result = self.get_request(url)
+        songs = result['result']['tracks']
+        songs = [Song(song['id'], song['name']) for song in songs]
+        return songs
+
     def get_album_songs(self, album_id):
         """Get a album's all songs.
 

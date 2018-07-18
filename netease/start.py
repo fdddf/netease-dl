@@ -96,6 +96,14 @@ def playlist(netease, name, id):
 
 
 @cli.command()
+@click.option('-i', '--id', type=int, help='Toplist id.')
+@click.pass_obj
+def toplist(netease, id):
+    """Download a toplist's songs by id."""
+    if id:
+        netease.download_toplist_by_id(id, 'toplist'+str(id))
+
+@cli.command()
 @click.option('-n', '--name', help='User name.')
 @click.option('-i', '--id', type=int, help='User id.')
 @click.pass_obj
